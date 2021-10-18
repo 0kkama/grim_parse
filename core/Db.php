@@ -4,17 +4,13 @@
 
     use grim_parser\exceptions\DbException;
     use grim_parser\utility\DbConfig;
-    use grim_parser\traits\TSingleton;
     use PDO;
-    use PDOException;
     use PDOStatement;
 
     final class Db
     {
         private PDO $dbh;
         private static ?Db $instance = null;
-
-        use TSingleton;
 
         public static function getInstance()
         {
@@ -24,11 +20,6 @@
         private function __construct()
         {
             $this->dbh = $this->newConnection(DbConfig::getInstance());
-        }
-
-        public function setInstance($params): void
-        {
-            $this->dbh = $this->newConnection($params);
         }
 
         /**
